@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from decimal import Decimal
 from enum import Enum
 from typing import Any
 
@@ -24,8 +25,11 @@ class MatrixReader:
         matrix_reader = self.matrix_readers.get(self.input_type)()
         return matrix_reader.read()
 
-    def process_raw_matrix(self, raw_matrix: list[str]) -> Matrix:
-        pass
+    def process_raw_matrix(self, raw_matrix: list[Any]) -> Matrix:
+        for i in range(len(raw_matrix)):
+            for j in range(len(raw_matrix[0])):
+                raw_matrix[i][j] = Decimal(raw_matrix[i][j])
+        return Matrix(raw_matrix)
 
     def read(self) -> Matrix:
         raw_matrix = self.read_raw_matrix()
