@@ -14,6 +14,8 @@ class Matrix:
 
     def __str__(self):
         out = ""
-        for line in self.data:
-            out += str(line) + "\n"
+        for i in range(len(self.data)):
+            for j in range(len(self.data[0])):
+                out += str(self.data[i][j]) + " "
+            out += "\n"
         return out
